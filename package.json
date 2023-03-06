@@ -1,0 +1,21 @@
+{
+  "name": "catalogo-omdbapi",
+  "version": "1.0.0",
+  "description": "Simples catálogo de filmes feito com a API OMDbAPI.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "filmes",
+    "series",
+    "episodios",
+    "omdb",
+    "api"
+  ],
+  "author": "Nicolas A. Hilbert",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.0-alpha1"
+  }
+}
