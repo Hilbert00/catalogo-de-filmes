@@ -29,11 +29,12 @@ class Filme {
 
     getCard = async () => {
         const card = document.createElement("div");
-        card.classList.add("card");
+        card.classList.add("card", "position-relative", "pb-5");
         card.setAttribute("style", "width: 100%;");
 
         const imgCartaz = document.createElement("img");
         imgCartaz.classList.add("card-img-top");
+        imgCartaz.setAttribute("style", "height: 24rem; object-fit: cover;");
         imgCartaz.setAttribute("src", this.cartaz);
 
         const cardBody = document.createElement("div");
@@ -45,6 +46,14 @@ class Filme {
 
         const cardDetails = document.createElement("div");
         cardDetails.setAttribute("style", "display: flex; justify-content: space-around;");
+
+        const btnDetails = document.createElement("button");
+        btnDetails.classList.add("btn", "btn-primary");
+        btnDetails.setAttribute("id", "btn-details");
+        btnDetails.setAttribute("style", "position: absolute; bottom: 1rem;");
+        btnDetails.setAttribute("data-id", this.id)
+        btnDetails.onclick = (e) => getDetails(e.target.getAttribute("data-id"));
+        btnDetails.appendChild(document.createTextNode("Ver Detalhes"));
 
         const detailsGenre = document.createElement("div");
         detailsGenre.setAttribute("style", "flex-grow: 1;");
@@ -64,6 +73,7 @@ class Filme {
 
         cardBody.appendChild(cardTitle);
         cardBody.appendChild(cardDetails);
+        cardBody.appendChild(btnDetails)
 
         card.appendChild(imgCartaz);
         card.appendChild(cardBody);

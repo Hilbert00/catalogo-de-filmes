@@ -89,9 +89,19 @@
             <div
                 id="lista-filmes"
                 class="container-md gap-4 mx-auto"
-                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))"
             ></div>
-            <div id="mostrar-filme"></div>
+            <div id="mostrar-filme" class="card flex-row">
+                <img id="movie-image" class="card-img-top" style="height: 100%; width: 400px;" src="">
+                <div class="card-body">
+                    <h5 id="movie-title" class="card-title"></h5>
+                    <div style="display: flex; flex-direction: column;">
+                        <div id="movie-year" style="flex-grow: 1;"></div>
+                        <div id="movie-genre" style="flex-grow: 1;"></div>
+                        <div id="movie-time" style="flex-grow: 1;"></div>
+                        <div id="movie-sinopse" style="flex-grow: 1;"></div>
+                    </div>
+                </div>
+            </div>
         </main>
         <script src="./JS/index.js"></script>
     </body>
