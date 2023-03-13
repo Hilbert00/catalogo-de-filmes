@@ -13,15 +13,61 @@ class Diretor {
 }
 
 class Filme {
-    constructor(id, titulo, ano, categoria, cartaz, direcao, atores, classificacao, avaliacao) {
+    constructor(id, titulo, ano, genero, duracao, sinopse, cartaz, direcao, elenco, classificacao, avaliacao) {
         this.id = id;
         this.titulo = titulo;
         this.ano = ano;
-        this.categoria = categoria;
+        this.genero = genero;
+        this.duracao = duracao;
+        this.sinopse = sinopse;
         this.cartaz = cartaz;
         this.direcao = direcao;
-        this.atores = atores;
+        this.elenco = elenco;
         this.classificacao = classificacao;
         this.avaliacao = avaliacao;
     }
+
+    getCard = async () => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.setAttribute("style", "width: 100%;");
+
+        const imgCartaz = document.createElement("img");
+        imgCartaz.classList.add("card-img-top");
+        imgCartaz.setAttribute("src", this.cartaz);
+
+        const cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
+
+        const cardTitle = document.createElement("h5");
+        cardTitle.classList.add("card-title");
+        cardTitle.appendChild(document.createTextNode(this.titulo));
+
+        const cardDetails = document.createElement("div");
+        cardDetails.setAttribute("style", "display: flex; justify-content: space-around;");
+
+        const detailsGenre = document.createElement("div");
+        detailsGenre.setAttribute("style", "flex-grow: 1;");
+        detailsGenre.appendChild(document.createTextNode(this.genero));
+
+        const detailsYear = document.createElement("div");
+        detailsYear.setAttribute("style", "flex-grow: 1;");
+        detailsYear.appendChild(document.createTextNode(this.ano));
+
+        const detailsRating = document.createElement("div");
+        detailsRating.setAttribute("style", "flex-grow: 1;");
+        detailsRating.appendChild(document.createTextNode(this.classificacao));
+
+        cardDetails.appendChild(detailsGenre);
+        cardDetails.appendChild(detailsYear);
+        cardDetails.appendChild(detailsRating);
+
+        cardBody.appendChild(cardTitle);
+        cardBody.appendChild(cardDetails);
+
+        card.appendChild(imgCartaz);
+        card.appendChild(cardBody);
+
+        return card;
+    };
 }
