@@ -85,22 +85,49 @@
                 </div>
             </div>
         </nav>
-        <main class="mt-4">
-            <div
-                id="lista-filmes"
-                class="container-md gap-4 mx-auto"
-            ></div>
+        <main class="my-4">
+            <div id="lista-filmes" class="container-md gap-4 mx-auto"></div>
             <div id="mostrar-filme" class="card flex-row">
-                <img id="movie-image" class="card-img-top" style="height: 100%; width: 400px;" src="">
-                <div class="card-body">
-                    <h5 id="movie-title" class="card-title"></h5>
-                    <div style="display: flex; flex-direction: column;">
-                        <div id="movie-year" style="flex-grow: 1;"></div>
-                        <div id="movie-genre" style="flex-grow: 1;"></div>
-                        <div id="movie-time" style="flex-grow: 1;"></div>
-                        <div id="movie-sinopse" style="flex-grow: 1;"></div>
+                <div id="detalhes" class="card d-flex flex-row" style="z-index: 10">
+                    <div style="max-width: 30%; min-width: 30%; overflow: hidden">
+                        <img id="movie-image" class="card-img-top h-100 w-100" style="object-fit: cover" src="" />
+                    </div>
+                    <div class="card-body">
+                        <button
+                            id="movie-close"
+                            class="btn-close position-absolute"
+                            style="right: 1rem; top: 1rem"
+                        ></button>
+                        <h2 id="movie-title" class="card-title">Título do filme</h2>
+                        <div class="d-flex flex-column w-100">
+                            <div class="mb-3">
+                                <span id="movie-year">20XX</span>
+                                ・
+                                <span id="movie-time">XXX min</span>
+                                ・
+                                <span id="movie-genre">XXXX, XXXX, XXXX</span>
+                            </div>
+                            <span id="movie-direction" class="mb-2">Direção: XXX, XXX</span>
+                            <span id="movie-cast" class="mb-3">Elenco: XXX, XXX, XXX, XXX</span>
+                            <p id="movie-synopsis">
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt, iusto minima? Quaerat
+                                sunt quo libero porro minima asperiores amet, molestiae omnis illo sit, iusto, magni
+                                quam fuga placeat assumenda doloremque.
+                            </p>
+                        </div>
                     </div>
                 </div>
+                <div
+                    style="
+                        backdrop-filter: blur(3px);
+                        width: 100vw;
+                        height: 100vh;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        transform: scale(1.03);
+                    "
+                ></div>
             </div>
         </main>
         <script src="./JS/index.js"></script>
