@@ -1,11 +1,16 @@
 const inputBucarFilme = document.querySelector("#input-buscar-filme");
 const btnBucarFilme = document.querySelector("#btn-buscar-filme");
-const btnFecharFilme = document.querySelector("#movie-close");
+const listaFilmes = document.querySelector("#lista-filmes");
 const filmeDetalhes = document.querySelector("#mostrar-filme");
 const detalhesCard = document.querySelector("#mostrar-filme #detalhes");
+const btnFecharFilme = document.querySelector("#movie-close");
+const btnFavoritarFilme = document.querySelector("#movie-favorite");
+const btnFavoritos = document.querySelector("#btn-favorites")
+
+const favoritos = window.localStorage.getItem("favorites") ? JSON.parse(window.localStorage.getItem("favorites")) : null;
+console.log(favoritos)
 
 async function listarFilmes(filmes) {
-    const listaFilmes = document.querySelector("#lista-filmes");
     listaFilmes.innerHTML = "";
 
     if (filmes.length > 0) {
@@ -49,6 +54,7 @@ async function showDetails(filme) {
         return ator;
     });
 
+    listaFilmes.style.display = "none";
     filmeDetalhes.style.display = "flex";
     poster.setAttribute("src", filme.cartaz);
     title.innerText = filme.titulo;
@@ -56,6 +62,7 @@ async function showDetails(filme) {
     genre.innerText = filme.genero.join(", ");
     time.innerText = filme.duracao;
     synopsis.innerText = filme.sinopse;
+    btnFavoritarFilme.setAttribute("data-object", JSON.stringify(filme));
 
     direction.innerHTML = "";
     direction.appendChild(document.createTextNode("Direção: "));
@@ -112,9 +119,7 @@ btnBucarFilme.onclick = () => {
                     const id = e.imdbID;
                     const titulo = e.Title;
                     const lancamento = e.Year;
-                    // const genero = e.Genre.split(",").map((e) => e.trim());
                     const cartaz = e.Poster;
-                    const idade = e.Rated;
 
                     return new Filme(id, titulo, lancamento, null, null, null, cartaz, null, null, null, null);
                 });
@@ -129,9 +134,34 @@ btnBucarFilme.onclick = () => {
 window.addEventListener("click", (e) => {
     if (e.target !== detalhesCard && !detalhesCard.contains(e.target)) {
         filmeDetalhes.style.display = "none";
+        listaFilmes.style.display = "grid"
     }
 });
 
 btnFecharFilme.addEventListener("click", () => {
     filmeDetalhes.style.display = "none";
+    listaFilmes.style.display = "grid";
 });
+
+btnFavoritarFilme.addEventListener("click", (e) => {
+    const movieData = JSON.parse(e.currentTarget.getAttribute("data-object"));
+    // btnFavoritarFilme.innerHTML = '<i class="bi bi-heart-fill align-self-center"></i>';
+
+    if (favoritos === null) {
+        window.localStorage.setItem("favorites", JSON.stringify([movieData]));
+    } else {
+        favoritos.push(movieData);
+        window.localStorage.setItem("favorites", JSON.stringify(favoritos));
+    }
+});
+
+btnFavoritos.addEventListener("click", () => {
+    if (favoritos !== null) {
+        const favoritosFormatados = favoritos.map((e) => {
+            return new Filme(e.id, e.titulo, e.ano, e.genero, e.duracao, e.sinopse, e.cartaz, e.direcao, e.elenco, e.classificacao, e.avaliacao);
+        })
+        console.log(favoritosFormatados);
+        listarFilmes(favoritosFormatados);
+    }
+
+})

@@ -55,21 +55,21 @@ class Filme {
         btnDetails.onclick = (e) => getDetails(e.target.getAttribute("data-id"));
         btnDetails.appendChild(document.createTextNode("Ver Detalhes"));
 
-        const detailsGenre = document.createElement("div");
-        detailsGenre.setAttribute("style", "flex-grow: 1;");
-        detailsGenre.appendChild(document.createTextNode(this.genero));
+        // const detailsGenre = document.createElement("div");
+        // detailsGenre.setAttribute("style", "flex-grow: 1;");
+        // detailsGenre.appendChild(document.createTextNode(this.genero));
 
         const detailsYear = document.createElement("div");
         detailsYear.setAttribute("style", "flex-grow: 1;");
         detailsYear.appendChild(document.createTextNode(this.ano));
 
-        const detailsRating = document.createElement("div");
-        detailsRating.setAttribute("style", "flex-grow: 1;");
-        detailsRating.appendChild(document.createTextNode(this.classificacao));
+        // const detailsRating = document.createElement("div");
+        // detailsRating.setAttribute("style", "flex-grow: 1;");
+        // detailsRating.appendChild(document.createTextNode(this.classificacao));
 
-        cardDetails.appendChild(detailsGenre);
+        // cardDetails.appendChild(detailsGenre);
         cardDetails.appendChild(detailsYear);
-        cardDetails.appendChild(detailsRating);
+        // cardDetails.appendChild(detailsRating);
 
         cardBody.appendChild(cardTitle);
         cardBody.appendChild(cardDetails);
