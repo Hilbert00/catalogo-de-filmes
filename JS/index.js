@@ -52,12 +52,12 @@ async function showDetails(filme) {
     filmeDetalhes.style.display = "flex";
 
     document.querySelector("#movie-image").setAttribute("src", filme.cartaz);
-    document.querySelector("#movie-image").innerText = filme.titulo;
+    document.querySelector("#movie-title").innerText = filme.titulo;
     document.querySelector("#movie-year").innerText = filme.ano;
     document.querySelector("#movie-genre").innerText = filme.genero.join(", ");
     document.querySelector("#movie-time").innerText = filme.duracao;
     document.querySelector("#movie-synopsis").innerText = filme.sinopse;
-    
+
     btnFavoritarFilme.setAttribute("data-object", JSON.stringify(filme));
 
     if (favoritos)
