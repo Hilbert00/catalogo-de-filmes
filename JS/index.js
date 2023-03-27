@@ -64,6 +64,12 @@ async function showDetails(filme) {
     synopsis.innerText = filme.sinopse;
     btnFavoritarFilme.setAttribute("data-object", JSON.stringify(filme));
 
+    if (favoritos.filter((e) => e.id === filme.id).length) {
+        btnFavoritarFilme.innerHTML = '<i class="bi bi-heart-fill align-self-center"></i>';
+    } else {
+        btnFavoritarFilme.innerHTML = '<i class="bi bi-heart align-self-center"></i>';
+    }
+
     direction.innerHTML = "";
     direction.appendChild(document.createTextNode("Direção: "));
     directionFormated.forEach((e) => {
@@ -131,13 +137,6 @@ btnBucarFilme.onclick = () => {
     return false;
 };
 
-window.addEventListener("click", (e) => {
-    if (e.target !== detalhesCard && !detalhesCard.contains(e.target)) {
-        filmeDetalhes.style.display = "none";
-        listaFilmes.style.display = "grid"
-    }
-});
-
 btnFecharFilme.addEventListener("click", () => {
     filmeDetalhes.style.display = "none";
     listaFilmes.style.display = "grid";
@@ -145,12 +144,19 @@ btnFecharFilme.addEventListener("click", () => {
 
 btnFavoritarFilme.addEventListener("click", (e) => {
     const movieData = JSON.parse(e.currentTarget.getAttribute("data-object"));
-    // btnFavoritarFilme.innerHTML = '<i class="bi bi-heart-fill align-self-center"></i>';
-
+    
     if (favoritos === null) {
         window.localStorage.setItem("favorites", JSON.stringify([movieData]));
+        btnFavoritarFilme.innerHTML = '<i class="bi bi-heart-fill align-self-center"></i>';
     } else {
-        favoritos.push(movieData);
+        if (favoritos.filter((e) => e.id === movieData.id).length) {
+            const indexCopy = favoritos.indexOf(favoritos.filter((e) => e.id === movieData.id)[0]);
+            btnFavoritarFilme.innerHTML = '<i class="bi bi-heart align-self-center"></i>';
+            favoritos.splice(indexCopy, 1);
+        } else {
+            btnFavoritarFilme.innerHTML = '<i class="bi bi-heart-fill align-self-center"></i>';
+            favoritos.push(movieData);
+        }
         window.localStorage.setItem("favorites", JSON.stringify(favoritos));
     }
 });
@@ -163,5 +169,4 @@ btnFavoritos.addEventListener("click", () => {
         console.log(favoritosFormatados);
         listarFilmes(favoritosFormatados);
     }
-
 })
