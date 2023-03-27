@@ -21,14 +21,8 @@ async function listarFilmes(filmes) {
 }
 
 async function showDetails(filme) {
-    const poster = document.querySelector("#movie-image");
-    const title = document.querySelector("#movie-title");
-    const year = document.querySelector("#movie-year");
-    const genre = document.querySelector("#movie-genre");
-    const time = document.querySelector("#movie-time");
     const direction = document.querySelector("#movie-direction");
     const cast = document.querySelector("#movie-cast");
-    const synopsis = document.querySelector("#movie-synopsis");
 
     const directionFormated = filme.direcao.map((e, i) => {
         const director = document.createElement("a");
@@ -56,19 +50,22 @@ async function showDetails(filme) {
 
     listaFilmes.style.display = "none";
     filmeDetalhes.style.display = "flex";
-    poster.setAttribute("src", filme.cartaz);
-    title.innerText = filme.titulo;
-    year.innerText = filme.ano;
-    genre.innerText = filme.genero.join(", ");
-    time.innerText = filme.duracao;
-    synopsis.innerText = filme.sinopse;
+
+    document.querySelector("#movie-image").setAttribute("src", filme.cartaz);
+    document.querySelector("#movie-image").innerText = filme.titulo;
+    document.querySelector("#movie-year").innerText = filme.ano;
+    document.querySelector("#movie-genre").innerText = filme.genero.join(", ");
+    document.querySelector("#movie-time").innerText = filme.duracao;
+    document.querySelector("#movie-synopsis").innerText = filme.sinopse;
+    
     btnFavoritarFilme.setAttribute("data-object", JSON.stringify(filme));
 
-    if (favoritos.filter((e) => e.id === filme.id).length) {
-        btnFavoritarFilme.innerHTML = '<i class="bi bi-heart-fill align-self-center"></i>';
-    } else {
-        btnFavoritarFilme.innerHTML = '<i class="bi bi-heart align-self-center"></i>';
-    }
+    if (favoritos)
+        if (favoritos.filter((e) => e.id === filme.id).length) {
+            btnFavoritarFilme.innerHTML = '<i class="bi bi-heart-fill align-self-center"></i>';
+        } else {
+            btnFavoritarFilme.innerHTML = '<i class="bi bi-heart align-self-center"></i>';
+        }
 
     direction.innerHTML = "";
     direction.appendChild(document.createTextNode("Direção: "));
@@ -166,7 +163,7 @@ btnFavoritos.addEventListener("click", () => {
         const favoritosFormatados = favoritos.map((e) => {
             return new Filme(e.id, e.titulo, e.ano, e.genero, e.duracao, e.sinopse, e.cartaz, e.direcao, e.elenco, e.classificacao, e.avaliacao);
         })
-        console.log(favoritosFormatados);
+
         listarFilmes(favoritosFormatados);
     }
 })
