@@ -5,10 +5,10 @@ const filmeDetalhes = document.querySelector("#mostrar-filme");
 const detalhesCard = document.querySelector("#mostrar-filme #detalhes");
 const btnFecharFilme = document.querySelector("#movie-close");
 const btnFavoritarFilme = document.querySelector("#movie-favorite");
-const btnFavoritos = document.querySelector("#btn-favorites")
+const btnFavoritos = document.querySelector("#btn-favorites");
+const btnEditarFavoritos = document.querySelector("#btn-edit")
 
-const favoritos = window.localStorage.getItem("favorites") ? JSON.parse(window.localStorage.getItem("favorites")) : null;
-console.log(favoritos)
+let favoritos = window.localStorage.getItem("favorites") ? JSON.parse(window.localStorage.getItem("favorites")) : null;
 
 async function listarFilmes(filmes) {
     listaFilmes.innerHTML = "";
@@ -18,66 +18,6 @@ async function listarFilmes(filmes) {
             listaFilmes.appendChild(await e.getCard());
         });
     }
-}
-
-async function showDetails(filme) {
-    const direction = document.querySelector("#movie-direction");
-    const cast = document.querySelector("#movie-cast");
-
-    const directionFormated = filme.direcao.map((e, i) => {
-        const director = document.createElement("a");
-        director.setAttribute("data-id", e.id);
-
-        director.appendChild(document.createTextNode(e.nome));
-        if (i + 1 !== filme.direcao.length) {
-            director.appendChild(document.createTextNode(", "));
-        }
-
-        return director;
-    });
-
-    const castFormated = filme.elenco.map((e, i) => {
-        const ator = document.createElement("a");
-        ator.setAttribute("data-id", e.id);
-
-        ator.appendChild(document.createTextNode(e.nome));
-        if (i + 1 !== filme.elenco.length) {
-            ator.appendChild(document.createTextNode(", "));
-        }
-
-        return ator;
-    });
-
-    listaFilmes.style.display = "none";
-    filmeDetalhes.style.display = "flex";
-
-    document.querySelector("#movie-image").setAttribute("src", filme.cartaz);
-    document.querySelector("#movie-title").innerText = filme.titulo;
-    document.querySelector("#movie-year").innerText = filme.ano;
-    document.querySelector("#movie-genre").innerText = filme.genero.join(", ");
-    document.querySelector("#movie-time").innerText = filme.duracao;
-    document.querySelector("#movie-synopsis").innerText = filme.sinopse;
-
-    btnFavoritarFilme.setAttribute("data-object", JSON.stringify(filme));
-
-    if (favoritos)
-        if (favoritos.filter((e) => e.id === filme.id).length) {
-            btnFavoritarFilme.innerHTML = '<i class="bi bi-heart-fill align-self-center"></i>';
-        } else {
-            btnFavoritarFilme.innerHTML = '<i class="bi bi-heart align-self-center"></i>';
-        }
-
-    direction.innerHTML = "";
-    direction.appendChild(document.createTextNode("Direção: "));
-    directionFormated.forEach((e) => {
-        direction.appendChild(e);
-    });
-
-    cast.innerHTML = "";
-    cast.appendChild(document.createTextNode("Elenco: "));
-    castFormated.forEach((e) => {
-        cast.appendChild(e);
-    });
 }
 
 async function getDetails(id) {
@@ -110,7 +50,7 @@ async function getDetails(id) {
                 avaliacoes
             );
         })
-        .then((final) => showDetails(final));
+        .then((filme) => filme.showDetails());
 }
 
 btnBucarFilme.onclick = () => {
@@ -156,6 +96,8 @@ btnFavoritarFilme.addEventListener("click", (e) => {
         }
         window.localStorage.setItem("favorites", JSON.stringify(favoritos));
     }
+
+    favoritos = JSON.parse(window.localStorage.getItem("favorites"));
 });
 
 btnFavoritos.addEventListener("click", () => {

@@ -18,3 +18,13 @@
     top: 0;
     width: 80%;
 }
+
+#btn-edit {
+    border: none;
+    bottom: 6rem;
+    font-size: 1.5rem;
+    position: fixed;
+    right: 12vw;
+    border-radius: 100%;
+    z-index: 10;
+}

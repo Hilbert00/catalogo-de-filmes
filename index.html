@@ -47,7 +47,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="/" class="nav-link active" aria-current="page">Home</a>
+                            <a href="./index.html" class="nav-link active" aria-current="page">Home</a>
                         </li>
 
                         <li class="nav-item d-flex align-items-center">
@@ -68,7 +68,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbar-dropdown">
                                 <li><a href="#" class="dropdown-item">Ação</a></li>
                                 <li><a href="#" class="dropdown-item">Suspense</a></li>
-                                <li><a href="#" class="dropdown-item">Aaventura</a></li>
+                                <li><a href="#" class="dropdown-item">Aventura</a></li>
                                 <li><a href="#" class="dropdown-item">Comédia</a></li>
                                 <li><a href="#" class="dropdown-item">Romance</a></li>
                                 <li><a href="#" class="dropdown-item">Terror</a></li>
@@ -92,7 +92,7 @@
             <div id="lista-filmes" class="container-md gap-4 mx-auto"></div>
             <div id="mostrar-filme" class="card flex-row">
                 <div id="detalhes" class="card d-flex flex-row" style="z-index: 10">
-                    <div style="max-width: 30%; min-width: 30%; overflow: hidden">
+                    <div style="max-width: 40%; min-width: 40%; overflow: hidden">
                         <img id="movie-image" class="card-img-top h-100 w-100" style="object-fit: cover" src="" />
                     </div>
                     <div class="card-body">
@@ -101,6 +101,12 @@
                             class="btn-close position-absolute"
                             style="right: 1.3rem; top: 1.3rem"
                         ></button>
+                        <button
+                            id="btn-edit"
+                            class="btn btn-success"
+                        >
+                            <i class='bi bi-pencil'></i>
+                        </button>
                         <div class="d-flex gap-3 mb-3">
                             <h2 id="movie-title" class="card-title"></h2>
                             <button
