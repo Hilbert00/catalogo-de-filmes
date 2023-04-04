@@ -6,7 +6,7 @@ const detalhesCard = document.querySelector("#mostrar-filme #detalhes");
 const btnFecharFilme = document.querySelector("#movie-close");
 const btnFavoritarFilme = document.querySelector("#movie-favorite");
 const btnFavoritos = document.querySelector("#btn-favorites");
-const btnEditarFavoritos = document.querySelector("#btn-edit")
+const btnEditarFavoritos = document.querySelector("#btn-edit");
 
 let favoritos = window.localStorage.getItem("favorites") ? JSON.parse(window.localStorage.getItem("favorites")) : null;
 
@@ -79,33 +79,24 @@ btnFecharFilme.addEventListener("click", () => {
     listaFilmes.style.display = "grid";
 });
 
-btnFavoritarFilme.addEventListener("click", (e) => {
-    const movieData = JSON.parse(e.currentTarget.getAttribute("data-object"));
-    
-    if (favoritos === null) {
-        window.localStorage.setItem("favorites", JSON.stringify([movieData]));
-        btnFavoritarFilme.innerHTML = '<i class="bi bi-heart-fill align-self-center"></i>';
-    } else {
-        if (favoritos.filter((e) => e.id === movieData.id).length) {
-            const indexCopy = favoritos.indexOf(favoritos.filter((e) => e.id === movieData.id)[0]);
-            btnFavoritarFilme.innerHTML = '<i class="bi bi-heart align-self-center"></i>';
-            favoritos.splice(indexCopy, 1);
-        } else {
-            btnFavoritarFilme.innerHTML = '<i class="bi bi-heart-fill align-self-center"></i>';
-            favoritos.push(movieData);
-        }
-        window.localStorage.setItem("favorites", JSON.stringify(favoritos));
-    }
-
-    favoritos = JSON.parse(window.localStorage.getItem("favorites"));
-});
-
 btnFavoritos.addEventListener("click", () => {
     if (favoritos !== null) {
         const favoritosFormatados = favoritos.map((e) => {
-            return new Filme(e.id, e.titulo, e.ano, e.genero, e.duracao, e.sinopse, e.cartaz, e.direcao, e.elenco, e.classificacao, e.avaliacao);
-        })
+            return new Filme(
+                e.id,
+                e.titulo,
+                e.ano,
+                e.genero,
+                e.duracao,
+                e.sinopse,
+                e.cartaz,
+                e.direcao,
+                e.elenco,
+                e.classificacao,
+                e.avaliacao
+            );
+        });
 
         listarFilmes(favoritosFormatados);
     }
-})
+});
